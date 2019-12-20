@@ -50,8 +50,11 @@ if (!dev && cluster.isMaster) {
       }));
     
       // Example server-side routing
-      server.get('/a', (req, res) => {
-        return nextApp.render(req, res, '/b', req.query)
+      server.get('/custom', (req, res) => {
+        res.setHeader('Content-Type', 'application/json')
+        res.statusCode = 200
+        res.end(JSON.stringify({ name: 'Custom Server' }))
+        return
       })
 
       // Example server-side routing
